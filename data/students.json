@@ -2,12 +2,12 @@
     {
         "name": "Alice",
         "course": "Python",
-        "grade": 85
+        "grade": 95
     },
     {
         "name": "Bob",
         "course": "Python",
-        "grade": 92
+        "grade": 98
     },
     {
         "name": "Charlie",

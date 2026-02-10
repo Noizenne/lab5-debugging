@@ -76,13 +76,20 @@ def update_json_student(filename: str, name: str, new_grade: int) -> None:
         if student['name'] == name:
             student['grade'] = new_grade
             updated = True
-        if not updated:
-            print(f"Student '{name}' not found")
+    if not updated:
+        print(f"Student '{name}' not found")
         return
     with open(filename, 'w') as f:
         json.dump(data, f, indent=4)
         print(f"Updated {name} to grade {new_grade}")
 
+
+def add_new_student_csv(filename: str, name: str, course: str, grade: int) -> None:
+    with open(filename, 'a', newline='') as f:
+        writer = csv.DictWriter(f, fieldnames=['name', 'course', 'grade'])
+        writer.writerow({'name': name, 'course': course, 'grade': grade})
+
+    
 
 print("\n--- Testing CSV Functions ---")
 print("Before:", read_csv('data/students.csv'))
@@ -90,5 +97,8 @@ update_csv_student('data/students.csv', 'Alice', 90)
 print("After:", read_csv('data/students.csv'))
 print("\n--- Testing JSON Functions ---")
 print("Before:", read_json('data/students.json'))
-update_json_student('data/students.json', 'Bob', 95)
+update_json_student('data/students.json', 'Bob', 98)
 print("After:", read_json('data/students.json'))
+print("\n--- Adding New Student to CSV ---")
+add_new_student_csv('data/students.csv', 'Dana', 'Python', 88)
+print("After: ", read_csv('data/students.csv'))
